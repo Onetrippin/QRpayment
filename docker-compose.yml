@@ -15,3 +15,23 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+
+  db:
+    container_name: qr-db
+    image: postgres:16-alpine
+    ports:
+      - "127.0.0.1:5432:${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+volumes:
+  postgres_data:
