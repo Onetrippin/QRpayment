@@ -5,7 +5,7 @@ class QRCode(models.Model):
     id = models.AutoField(primary_key=True)
     pay_tag_id = models.BigIntegerField(db_index=True)
     transport = models.ForeignKey('Transport', on_delete=models.CASCADE)
-    is_actual = models.BooleanField(default=True, db_index=True)
+    is_actual = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'QR code'
