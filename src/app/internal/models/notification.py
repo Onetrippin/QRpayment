@@ -24,6 +24,7 @@ class Notification(models.Model):
 
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey('User', related_name='notifications', on_delete=models.CASCADE)
+    number = models.PositiveSmallIntegerField()
     favourite_route = models.ForeignKey('FavouriteRoute', on_delete=models.CASCADE)
     stop = models.ForeignKey('Stop', related_name='notifications_stops', on_delete=models.CASCADE)
     days = ArrayField(models.CharField(max_length=15, choices=WEEK_DAYS))
@@ -34,6 +35,7 @@ class Notification(models.Model):
     class Meta:
         verbose_name = 'Notification'
         verbose_name_plural = 'Notifications'
+        constraints = [models.UniqueConstraint(fields=['user', 'number'], name='uniq_number_per_user')]
 
     def __str__(self):
-        return f'{self.id}:{self.user.username}'
+        return f'{self.id}:{self.user}'

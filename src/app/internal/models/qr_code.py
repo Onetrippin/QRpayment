@@ -5,6 +5,7 @@ class QRCode(models.Model):
     id = models.AutoField(primary_key=True)
     pay_tag_id = models.BigIntegerField(db_index=True)
     transport = models.ForeignKey('Transport', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     is_actual = models.BooleanField(default=True)
 
     class Meta:

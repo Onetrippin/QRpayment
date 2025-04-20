@@ -6,8 +6,8 @@ class Stop(models.Model):
     s_id = models.IntegerField(db_index=True)
     city = models.ForeignKey('City', on_delete=models.PROTECT)
     title = models.CharField(max_length=64, db_index=True)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.DecimalField(max_digits=10, decimal_places=6)
+    longitude = models.DecimalField(max_digits=11, decimal_places=6)
 
     class Meta:
         verbose_name = 'Stop'
