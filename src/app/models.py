@@ -1,4 +1,3 @@
-from app.internal.users.data.models.admin_user import AdminUser
 from app.internal.cities.data.models.city import City
 from app.internal.favourites.data.models.favourite_route import FavouriteRoute
 from app.internal.favourites.data.models.notification import Notification
@@ -8,4 +7,5 @@ from app.internal.transport_network.data.models.route import Route
 from app.internal.transport_network.data.models.route_stop import RouteStop
 from app.internal.transport_network.data.models.stop import Stop
 from app.internal.transport_network.data.models.transport import Transport
+from app.internal.users.data.models.admin_user import AdminUser
 from app.internal.users.data.models.user import User

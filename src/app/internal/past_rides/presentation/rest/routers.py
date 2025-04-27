@@ -1,10 +1,10 @@
-from typing import List
 from http import HTTPStatus
+from typing import List
 
 from ninja import Router
 
 from app.internal.common.response_entities import ErrorResponse
-from app.internal.past_rides.domain.entities.past_ride import PastRideOut, AddedPastRideOut
+from app.internal.past_rides.domain.entities.past_ride import AddedPastRideOut, PastRideOut
 from app.internal.past_rides.presentation.rest.handlers import PastRideHandlers
 
 

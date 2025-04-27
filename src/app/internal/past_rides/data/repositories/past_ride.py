@@ -8,8 +8,7 @@ from app.internal.past_rides.domain.interfaces.past_ride import IPastRideReposit
 class PastRideRepository(IPastRideRepository):
     def get_past_rides(self, user_id: int) -> List[PastRideOut]:
         past_rides = (
-            PastRide.objects
-            .filter(user_id=user_id)
+            PastRide.objects.filter(user_id=user_id)
             .select_related('transport', 'transport__route')
             .values(
                 'date',
@@ -21,24 +20,24 @@ class PastRideRepository(IPastRideRepository):
             )
             .order_by('-date')
         )
-        return [PastRideOut(
-            route_number=past_ride.get('transport__route__number'),
-            route_name=past_ride.get('transport__route__name'),
-            transport_type=past_ride.get('transport__type'),
-            transport_state_number=past_ride.get('transport_state_number'),
-            price=past_ride.get('price'),
-            date=past_ride.get('date'),
-        ) for past_ride in past_rides]
+        return [
+            PastRideOut(
+                route_number=past_ride.get('transport__route__number'),
+                route_name=past_ride.get('transport__route__name'),
+                transport_type=past_ride.get('transport__type'),
+                transport_state_number=past_ride.get('transport_state_number'),
+                price=past_ride.get('price'),
+                date=past_ride.get('date'),
+            )
+            for past_ride in past_rides
+        ]
 
     def add_past_ride(self, user_id: int, past_ride_data: PastRideIn) -> AddedPastRideOut:
         created_past_ride = PastRide.objects.create(
-            user_id=user_id,
-            transport_id=past_ride_data.transport_id,
-            price=past_ride_data.price
+            user_id=user_id, transport_id=past_ride_data.transport_id, price=past_ride_data.price
         )
         return AddedPastRideOut(
             user_id=created_past_ride.user_id,
             transport_id=created_past_ride.transport_id,
             price=created_past_ride.price,
         )
-
