@@ -16,14 +16,14 @@ class PastRideRepository(IPastRideRepository):
                 'transport__state_number',
                 'transport__type',
                 'transport__route__number',
-                'transport__route__name',
+                'transport__route__title',
             )
             .order_by('-date')
         )
         return [
             PastRideOut(
                 route_number=past_ride.get('transport__route__number'),
-                route_name=past_ride.get('transport__route__name'),
+                route_title=past_ride.get('transport__route__title'),
                 transport_type=past_ride.get('transport__type'),
                 transport_state_number=past_ride.get('transport_state_number'),
                 price=past_ride.get('price'),
