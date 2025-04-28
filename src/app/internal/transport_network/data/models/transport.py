@@ -11,6 +11,8 @@ class Transport(models.Model):
     route = models.ForeignKey('Route', on_delete=models.PROTECT, related_name='transports')
     state_number = models.CharField(max_length=128, db_index=True)
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'Transport'
         verbose_name_plural = 'Transports'

@@ -2,8 +2,8 @@ from ninja import Schema
 
 
 class SuccessResponse(Schema):
-    success: bool = True
+    success: str
 
 
 class ErrorResponse(Schema):
-    error: bool = True
+    error: str
