@@ -14,6 +14,8 @@ class User(models.Model):
     city = models.ForeignKey('City', on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'

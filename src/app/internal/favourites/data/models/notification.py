@@ -32,6 +32,8 @@ class Notification(models.Model):
     time_to = models.TimeField()
     interval = models.DurationField(choices=INTERVALS)
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'Notification'
         verbose_name_plural = 'Notifications'

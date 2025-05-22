@@ -7,6 +7,8 @@ class RouteStop(models.Model):
     stop = models.ForeignKey('Stop', on_delete=models.CASCADE)
     status = models.CharField(max_length=1, default='')
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'RouteStop'
         verbose_name_plural = 'RouteStops'
