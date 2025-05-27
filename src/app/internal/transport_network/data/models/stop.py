@@ -9,6 +9,8 @@ class Stop(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=6)
     longitude = models.DecimalField(max_digits=11, decimal_places=6)
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'Stop'
         verbose_name_plural = 'Stops'

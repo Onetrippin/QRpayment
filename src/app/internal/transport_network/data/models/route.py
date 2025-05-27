@@ -14,9 +14,11 @@ class Route(models.Model):
 
     objects = models.Manager()
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'Route'
         verbose_name_plural = 'Routes'
 
     def __str__(self):
-        return f'{self.id}:{self.r_id}'
+        return f'{self.r_id}:{self.title}'

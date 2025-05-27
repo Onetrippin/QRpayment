@@ -35,6 +35,8 @@ class Notification(models.Model):
 
     objects = models.Manager()
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = 'Notification'
         verbose_name_plural = 'Notifications'
