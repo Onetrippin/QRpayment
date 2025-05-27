@@ -31,6 +31,9 @@ class Notification(models.Model):
     time_from = models.TimeField()
     time_to = models.TimeField()
     interval = models.DurationField(choices=INTERVALS)
+    is_enabled = models.BooleanField(default=False)
+
+    objects = models.Manager()
 
     class Meta:
         verbose_name = 'Notification'

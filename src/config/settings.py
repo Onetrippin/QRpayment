@@ -26,13 +26,14 @@ environ.Env.read_env(path.join(BASE_DIR.parent, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY')
+TELEGRAM_BOT_TOKEN = env('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHANNEL_ID = env('TELEGRAM_CHANNEL_ID')
+MINIAPP_URL = env('MINIAPP_URL')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = []
-
-APP_PORT = env('APP_PORT')
 
 # Application definition
 
