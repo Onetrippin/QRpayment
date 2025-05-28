@@ -3,13 +3,17 @@ import uuid
 from django.db import models
 
 
+def generate_hex_uuid():
+    return uuid.uuid4().hex
+
+
 class Transport(models.Model):
-    TRANSPORT_TYPE_CHOICES = [(1, 'Автобус'), (2, 'Троллейбус'), (3, 'Трамвай')]
+    TRANSPORT_TYPE_CHOICES = [('bus', 'Автобус'), ('trol', 'Троллейбус'), ('tram', 'Трамвай')]
 
     id = models.AutoField(primary_key=True)
-    uuid = models.CharField(max_length=32, unique=True, default='123')
+    uuid = models.CharField(max_length=32, unique=True, default=generate_hex_uuid, editable=False)
     garage_number = models.CharField(max_length=128, db_index=True)
-    type = models.IntegerField(choices=TRANSPORT_TYPE_CHOICES, db_index=True)
+    type = models.CharField(choices=TRANSPORT_TYPE_CHOICES, db_index=True)
     city = models.ForeignKey('City', on_delete=models.PROTECT)
     route = models.ForeignKey('Route', on_delete=models.PROTECT, related_name='transports')
     state_number = models.CharField(max_length=128, db_index=True)

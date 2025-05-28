@@ -1,0 +1,52 @@
+name: Autodeploy
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup make
+        run: |
+          apk add make || true
+      - name: Copy .env file
+        run: cp ${{ secrets.DOT_ENV }} .env
+      - name: Build and push images
+        run: make build push
+  lint:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run lint
+        run: make check_lint
+  test:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: make test
+  deploy:
+    runs-on: self-hosted
+    needs: test
+    if: github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy app (manual)
+        run: |
+          make pull down migrate collectstatic up
