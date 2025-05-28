@@ -50,7 +50,7 @@ async def inline_mode_pay(update: Update, context: CallbackContext) -> None:
         'trol': 'https://img.icons8.com/?size=100&id=fIIIRQVdZWjH&format=png&color=000000',
         'tram': 'https://img.icons8.com/?size=100&id=QhDRQuByCL0n&format=png&color=000000',
     }
-    emoji = {'bus': '🚌', 'trol': '🚎', 'tram': '🚋',}
+    emoji = {'bus': '🚌', 'trol': '🚎', 'tram': '🚋'}
     results = []
     for index, transport in enumerate(transports[:50]):
         pay_tag_ids = transport.get('pay_tag_ids') or []

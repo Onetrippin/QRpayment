@@ -37,7 +37,7 @@ async def notifications_list(update: Update, context: CallbackContext) -> None:
                     f'№{notif.get("favourite_route__route__number")} '
                     f'\"{notif.get("favourite_route__route__title")}\"\n'
                     f'🚏 {notif.get("stop__title")}\n'
-                    f'📅 {', '.join(notif.get("days"))}\n'
+                    f'📅 {", ".join(notif.get("days"))}\n'
                     f'🕔 {notif.get("time_from").strftime("%H:%M")}-{notif.get("time_to").strftime("%H:%M")}'
                 )
                 lines.append(line)

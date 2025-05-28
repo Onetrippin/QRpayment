@@ -1,7 +1,7 @@
 from typing import Optional
 
 from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Q, Case, When, IntegerField
+from django.db.models import Case, IntegerField, Q, When
 
 from app.internal.transport_network.data.models.transport import Transport
 from app.internal.transport_network.domain.entities.transport_network import TransportInfoIn, TransportInfoOut
@@ -26,15 +26,10 @@ class TransportNetworkRepository(ITransportNetworkRepository):
 
         return list(
             (
-                Transport.objects
-                .filter(filters)
+                Transport.objects.filter(filters)
                 .select_related('route', 'city')
                 .annotate(
-                    pay_tag_ids=ArrayAgg(
-                        'qr_codes__pay_tag_id',
-                        filter=Q(qr_codes__is_actual=True),
-                        distinct=True
-                    )
+                    pay_tag_ids=ArrayAgg('qr_codes__pay_tag_id', filter=Q(qr_codes__is_actual=True), distinct=True)
                 )
                 .values(
                     'type',
@@ -43,8 +38,7 @@ class TransportNetworkRepository(ITransportNetworkRepository):
                     'route__title',
                     'pay_tag_ids',
                 )
-            )
-            .order_by(*order, 'route__number', 'state_number')[offset:offset + limit]
+            ).order_by(*order, 'route__number', 'state_number')[offset : offset + limit]
         )
 
     def get_transport_info(self, transport_info_data: TransportInfoIn) -> Optional[TransportInfoOut]:
