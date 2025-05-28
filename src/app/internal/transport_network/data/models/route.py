@@ -14,8 +14,6 @@ class Route(models.Model):
 
     objects = models.Manager()
 
-    objects = models.Manager()
-
     class Meta:
         verbose_name = 'Route'
         verbose_name_plural = 'Routes'
