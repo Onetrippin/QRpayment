@@ -7,3 +7,6 @@ class CityService:
 
     def get_cities_list(self, request):
         return self.city_repo.get_cities_list()
+
+    def is_city_valid(self, city: str) -> bool:
+        return self.city_repo.is_city_valid(city)

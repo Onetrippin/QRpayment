@@ -8,3 +8,7 @@ class ICityRepository(ABC):
     @abstractmethod
     def get_cities_list(self) -> List[CitySchema]:
         ...
+
+    @abstractmethod
+    def is_city_valid(self, city: str) -> bool:
+        ...

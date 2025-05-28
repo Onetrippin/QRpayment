@@ -42,3 +42,16 @@ async def get_qr_links_keyboard(pay_tags: list[str]) -> InlineKeyboardMarkup:
         buttons.append(additional[i : i + 2])
 
     return InlineKeyboardMarkup(buttons)
+
+
+async def get_inline_mode_hint_keyboard(query: str = '') -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    '🔍 Вернуться к поиску',
+                    switch_inline_query_current_chat=f'{query.strip()} ' if query else ''
+                )
+            ],
+        ],
+    )

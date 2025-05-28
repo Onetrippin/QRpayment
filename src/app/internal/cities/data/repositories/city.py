@@ -17,3 +17,6 @@ class CityRepository(ICityRepository):
             )
             for city in cities
         ]
+
+    def is_city_valid(self, city: str) -> bool:
+        return City.objects.filter(name__iexact=city, is_active=True).exists()
