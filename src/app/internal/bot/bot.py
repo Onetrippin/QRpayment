@@ -21,10 +21,10 @@ def build_bot() -> Application:
     bot = Application.builder().token(settings.TELEGRAM_BOT_TOKEN).defaults(Defaults(parse_mode=ParseMode.HTML)).build()
     bot.add_handler(
         ConversationHandler(
-            entry_points=[MessageHandler(filters.Text(['Поддержка']), support_handler)],
+            entry_points=[MessageHandler(filters.Text(['📞 Поддержка']), support_handler)],
             states={
                 'wait_message': [
-                    MessageHandler(filters.ALL & ~filters.Text(['Отмена']), wait_message),
+                    MessageHandler(filters.ALL & ~filters.Text(['❌ Отмена']), wait_message),
                 ]
             },
             fallbacks=[MessageHandler(filters.TEXT, cancel)],
@@ -32,11 +32,11 @@ def build_bot() -> Application:
     )
     bot.add_handler(CommandHandler('start', start_handler))
     bot.add_handler(
-        MessageHandler(filters.TEXT & (filters.Regex(r'(?i)^/help(\s|$)') | filters.Text(['Помощь'])), help_handler)
+        MessageHandler(filters.TEXT & (filters.Regex(r'(?i)^/help(\s|$)') | filters.Text(['❓ Помощь'])), help_handler)
     )
-    bot.add_handler(MessageHandler(filters.Text(['Уведомления']), notifications_list))
-    bot.add_handler(MessageHandler(filters.Text(['Быстрая оплата']), fast_pay))
+    bot.add_handler(MessageHandler(filters.Text(['🔔 Уведомления']), notifications_list))
+    bot.add_handler(MessageHandler(filters.Text(['🚀 Быстрая оплата']), fast_pay))
     bot.add_handler(CallbackQueryHandler(disable_notifs))
     bot.add_handler(InlineQueryHandler(inline_mode_pay))
-    bot.add_handler(MessageHandler(filters.ALL, other))
+    bot.add_handler(MessageHandler(filters.ALL & ~filters.ViaBot(bot_id=settings.TELEGRAM_BOT_ID), other))
     return bot

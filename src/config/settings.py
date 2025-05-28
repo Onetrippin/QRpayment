@@ -29,11 +29,16 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 TELEGRAM_BOT_TOKEN = env('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHANNEL_ID = env('TELEGRAM_CHANNEL_ID')
 MINIAPP_URL = env('MINIAPP_URL')
+TELEGRAM_BOT_ID = env.int('TELEGRAM_BOT_ID')
+TELEGRAM_WEBHOOK_TOKEN = env('TELEGRAM_WEBHOOK_TOKEN')
+TELEGRAM_WEBHOOK_URL = env('TELEGRAM_WEBHOOK_URL')
+WEBHOOK_PORT = env('WEBHOOK_PORT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -128,6 +133,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = path.join(BASE_DIR, 'static')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -69,3 +69,6 @@ clean:
 
 test:
 	$(DOCKER_COMPOSE) run --rm $(SERVICE) pytest --disable-warnings
+
+gen_webhook_token:
+	$(EXEC) python3 -c "import secrets; print(secrets.token_urlsafe(48)[:64])"

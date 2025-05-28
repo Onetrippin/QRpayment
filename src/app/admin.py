@@ -12,8 +12,5 @@ from app.internal.transport_network.presentation.admin.stop import StopAdmin
 from app.internal.transport_network.presentation.admin.transport import TransportAdmin
 from app.internal.users.presentation.admin.user import UserAdmin
 
-
-
-
 admin.site.site_title = 'QR-payment administration'
 admin.site.site_header = 'QR-payment administration'
