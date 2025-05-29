@@ -14,9 +14,7 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    env:
-      IMAGE_APP: ${{ vars.IMAGE_APP }}
-      IMAGE_BOT: ${{ vars.IMAGE_BOT }}
+    environment: prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,6 +29,7 @@ jobs:
         run: make build push
   lint:
     runs-on: self-hosted
+    environment: prod
     needs: build
     steps:
       - uses: actions/checkout@v3
@@ -38,6 +37,7 @@ jobs:
         run: make check_lint
   test:
     runs-on: self-hosted
+    environment: prod
     needs: build
     steps:
       - uses: actions/checkout@v3
@@ -45,6 +45,7 @@ jobs:
         run: make test
   deploy:
     runs-on: self-hosted
+    environment: prod
     needs: test
     if: github.event_name == 'workflow_dispatch'
     permissions:
