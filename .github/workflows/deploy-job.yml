@@ -34,16 +34,11 @@ jobs:
   lint:
     runs-on: self-hosted
     environment: prod
-    env:
-      APP_PORT: ${{ vars.APP_PORT }}
-      NGINX_PORT: ${{ vars.NGINX_PORT }}
-      POSTGRES_DB: ${{ vars.POSTGRES_DB }}
-      POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
-      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-      WEBHOOK_PORT: ${{ vars.WEBHOOK_PORT }}
     needs: build
     steps:
       - uses: actions/checkout@v3
+      - name: Copy .env file
+        run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Run lint
         run: make check_lint
   test:
@@ -52,6 +47,8 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
+      - name: Copy .env file
+        run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Run tests
         run: make test
   deploy:
@@ -64,6 +61,8 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v3
+      - name: Copy .env file
+        run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Deploy app (manual)
         run: |
           make pull down migrate collectstatic up
