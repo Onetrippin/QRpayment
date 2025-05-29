@@ -11,6 +11,10 @@ on:
       - dev
   workflow_dispatch:
 
+env:
+  IMAGE_APP: ${{ vars.IMAGE_APP }}
+  IMAGE_BOT: ${{ vars.IMAGE_BOT }}
+
 jobs:
   build:
     runs-on: self-hosted
@@ -25,13 +29,18 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
-      - name: Export env vars for next steps
-        run: cat .env >> $GITHUB_ENV
       - name: Build and push images
         run: make build push
   lint:
     runs-on: self-hosted
     environment: prod
+    env:
+      APP_PORT: ${{ vars.APP_PORT }}
+      NGINX_PORT: ${{ vars.NGINX_PORT }}
+      POSTGRES_DB: ${{ vars.POSTGRES_DB }}
+      POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+      POSTGRES_USER: ${{ vars.POSTGRES_USER }}
+      WEBHOOK_PORT: ${{ vars.WEBHOOK_PORT }}
     needs: build
     steps:
       - uses: actions/checkout@v3
