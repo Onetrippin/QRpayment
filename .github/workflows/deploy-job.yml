@@ -15,8 +15,8 @@ jobs:
   build:
     runs-on: self-hosted
     env:
-      IMAGE_APP: ${{ secrets.IMAGE_APP }}
-      IMAGE_BOT: ${{ secrets.IMAGE_BOT }}
+      IMAGE_APP: ${{ vars.IMAGE_APP }}
+      IMAGE_BOT: ${{ vars.IMAGE_BOT }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
