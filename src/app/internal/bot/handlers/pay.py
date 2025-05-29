@@ -5,8 +5,12 @@ from telegram import InlineQueryResultArticle, InputTextMessageContent, Update
 from telegram.ext import CallbackContext
 
 from app.internal.bot.decorators import add_user_if_not_exists
-from app.internal.bot.inline_mode_answers import get_answer_query_is_empty, get_result_no_search_str, \
-    get_result_not_valid_city, get_result_no_results
+from app.internal.bot.inline_mode_answers import (
+    get_answer_query_is_empty,
+    get_result_no_results,
+    get_result_no_search_str,
+    get_result_not_valid_city,
+)
 from app.internal.bot.keyboards import get_fast_pay_keyboard, get_qr_links_keyboard
 from app.internal.cities.data.repositories.city import CityRepository
 from app.internal.cities.domain.services.city import CityService
@@ -58,7 +62,7 @@ async def inline_mode_pay(update: Update, context: CallbackContext) -> None:
         city=city,
         query=search_query,
         offset=offset,
-        limit=limit+1,
+        limit=limit + 1,
     )
     has_next_page = len(transports) > limit
     transport_logo = {

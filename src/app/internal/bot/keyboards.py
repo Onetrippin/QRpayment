@@ -49,8 +49,7 @@ async def get_inline_mode_hint_keyboard(query: str = '') -> InlineKeyboardMarkup
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    '🔍 Вернуться к поиску',
-                    switch_inline_query_current_chat=f'{query.strip()} ' if query else ''
+                    '🔍 Вернуться к поиску', switch_inline_query_current_chat=f'{query.strip()} ' if query else ''
                 )
             ],
         ],

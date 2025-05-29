@@ -9,7 +9,7 @@ async def get_answer_query_is_empty() -> list:
             id='empty',
             title='Подсказка',
             input_message_content=InputTextMessageContent(
-                message_text= (
+                message_text=(
                     'Введи <b>город</b>, а затем <b>поисковой запрос</b>, разделяя пробелами, '
                     'например, <code>@pay4ridebot Екатеринбург АБВ</code>'
                 ),
@@ -58,7 +58,7 @@ async def get_result_no_results(query: str) -> InlineQueryResultArticle:
         title='Ничего не найдено',
         input_message_content=InputTextMessageContent(
             message_text='<b><i>Ничего не найдено...</i></b>\n\n'
-                         'Проверь, правильно ли ты ввёл <b>город</b> и <b>номер маршрута/госномер</b>',
+            'Проверь, правильно ли ты ввёл <b>город</b> и <b>номер маршрута/госномер</b>',
             disable_web_page_preview=True,
         ),
         description='Возможно, ты ошибся при вводе',
