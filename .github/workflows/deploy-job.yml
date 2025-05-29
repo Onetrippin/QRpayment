@@ -14,9 +14,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    env:
-      IMAGE_APP: qr-app
-      IMAGE_BOT: qr-bot
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
