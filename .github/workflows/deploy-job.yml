@@ -21,7 +21,7 @@ jobs:
     environment: prod
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup make
         run: |
           apk add make || true
@@ -36,13 +36,13 @@ jobs:
     environment: prod
     needs: build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Check containers status
         run: docker ps -a
-      - name: Start services
-        run: docker compose up -d
+#      - name: Start services
+#        run: docker compose up -d
       - name: Run lint
         run: make check_lint
   test:
@@ -50,7 +50,7 @@ jobs:
     environment: prod
     needs: lint
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Run tests
@@ -64,7 +64,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Deploy app (manual)
