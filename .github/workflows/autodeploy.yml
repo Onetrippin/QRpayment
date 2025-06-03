@@ -54,6 +54,8 @@ jobs:
       - name: Build and push images
         run: |
           make build push
+          docker tag $IMAGE_APP $IMAGE_APP_LATEST
+          docker tag $IMAGE_BOT $IMAGE_BOT_LATEST
           docker push $IMAGE_APP_LATEST
           docker push $IMAGE_BOT_LATEST
 
