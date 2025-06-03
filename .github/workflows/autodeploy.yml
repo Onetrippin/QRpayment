@@ -49,8 +49,13 @@ jobs:
         run: |
           echo "IMAGE_APP=${{ vars.IMAGE_APP }}:prod-${{ github.run_number }}" >> $GITHUB_ENV
           echo "IMAGE_BOT=${{ vars.IMAGE_BOT }}:prod-${{ github.run_number }}" >> $GITHUB_ENV
+          echo "IMAGE_APP_LATEST=${{ vars.IMAGE_APP }}:latest" >> $GITHUB_ENV
+          echo "IMAGE_BOT_LATEST=${{ vars.IMAGE_BOT }}:latest" >> $GITHUB_ENV
       - name: Build and push images
-        run: make build push
+        run: |
+          make build push
+          docker push $IMAGE_APP_LATEST
+          docker push $IMAGE_BOT_LATEST
 
   lint-test:
     if: github.ref_name != 'main'
