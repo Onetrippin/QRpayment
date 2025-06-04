@@ -24,7 +24,3 @@ def get_api():
 
 
 ninja_api = get_api()
-
-urlpatterns = [
-    path('', ninja_api.urls),
-]
