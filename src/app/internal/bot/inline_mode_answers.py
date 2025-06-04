@@ -52,16 +52,16 @@ async def get_result_not_valid_city(city: str) -> InlineQueryResultArticle:
     )
 
 
-async def get_result_no_results(query: str) -> InlineQueryResultArticle:
-    return InlineQueryResultArticle(
-        id='no_results',
-        title='Ничего не найдено',
-        input_message_content=InputTextMessageContent(
-            message_text='<b><i>Ничего не найдено...</i></b>\n\n'
-            'Проверь, правильно ли ты ввёл <b>город</b> и <b>номер маршрута/госномер</b>',
-            disable_web_page_preview=True,
-        ),
-        description='Возможно, ты ошибся при вводе',
-        thumbnail_url='https://img.icons8.com/?size=100&id=20732&format=png&color=000000',
-        reply_markup=await get_inline_mode_hint_keyboard(query.split()[0].title()),
-    )
+# async def get_result_no_results(query: str) -> InlineQueryResultArticle:
+#     return InlineQueryResultArticle(
+#         id='no_results',
+#         title='Ничего не найдено',
+#         input_message_content=InputTextMessageContent(
+#             message_text='<b><i>Ничего не найдено...</i></b>\n\n'
+#             'Проверь, правильно ли ты ввёл <b>город</b> и <b>номер маршрута/госномер</b>',
+#             disable_web_page_preview=True,
+#         ),
+#         description='Возможно, ты ошибся при вводе',
+#         thumbnail_url='https://img.icons8.com/?size=100&id=20732&format=png&color=000000',
+#         reply_markup=await get_inline_mode_hint_keyboard(query.split()[0].title()),
+#     )
