@@ -22,7 +22,7 @@ jobs:
       - name: Setup make
         run: apk add make || true
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login mirror.gcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Set tagged image name
@@ -42,7 +42,7 @@ jobs:
       - name: Setup make
         run: apk add make || true
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login mirror.gcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Set tagged image name
@@ -120,7 +120,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.FPI_PAT }}" | docker login mirror.gcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.FPI_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Set tagged image name
@@ -141,7 +141,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.FPI_PAT }}" | docker login mirror.gcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.FPI_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Copy .env file
         run: echo "${{ secrets.DOT_ENV }}" > .env
       - name: Set tagged image name
