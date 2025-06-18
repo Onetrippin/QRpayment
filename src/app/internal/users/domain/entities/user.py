@@ -1,16 +1,8 @@
 from ninja import Schema
 
 
-class UserSchema(Schema):
-    ...
-
-
-class UserOut(UserSchema):
-    ...
-
-
-class UserIn(UserSchema):
-    ...
+class UserCityIn(Schema):
+    city_id: int
 
 
 class TelegramUserSchema(Schema):

@@ -1,5 +1,7 @@
-from app.internal.users.data.models.user import User
 from app.internal.users.domain.entities.user import TelegramUserIn
+from app.internal.cities.data.models.city import City
+from app.internal.users.data.models.user import User
+from app.internal.users.domain.entities.user import UserCityIn
 from app.internal.users.domain.interfaces.user import IUserRepository
 
 
@@ -26,3 +28,11 @@ class UserRepository(IUserRepository):
 
     def get_city_by_chat_id(self, chat_id: int) -> str | None:
         return User.objects.filter(chat_id=chat_id).values_list('city__name', flat=True).first()
+
+    def set_user_city(self, user_id: int, user_city_data: UserCityIn) -> bool:
+        city_exists = City.objects.filter(id=user_city_data.city_id, is_active=True).exists()
+        if not city_exists:
+            return False
+
+        updated = User.objects.filter(id=user_id).update(city_id=user_city_data.city_id)
+        return updated > 0
