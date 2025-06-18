@@ -2,6 +2,6 @@ from ninja import Schema
 
 
 class CitySchema(Schema):
-    city_id: int
-    city_name: str
+    id: int
+    name: str
     is_active: bool

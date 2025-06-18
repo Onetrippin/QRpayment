@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from ninja import Router
+from typing import List
 
 from app.internal.cities.domain.entities.city import CitySchema
 from app.internal.cities.presentation.rest.handlers import CityHandlers
@@ -12,7 +13,7 @@ def get_cities_router(city_handlers: CityHandlers) -> Router:
 
     @router.get(
         '/cities',
-        response={HTTPStatus.OK: CitySchema, HTTPStatus.NOT_FOUND: ErrorResponse},
+        response={HTTPStatus.OK: List[CitySchema], HTTPStatus.NOT_FOUND: ErrorResponse},
         summary='Получение списка всех городов',
     )
     def get_cities_list(request):

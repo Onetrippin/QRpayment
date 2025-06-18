@@ -9,14 +9,7 @@ class CityRepository(ICityRepository):
     def get_cities_list(self) -> List[CitySchema]:
         cities = City.objects.all().values('id', 'name', 'is_active')
 
-        return [
-            CitySchema(
-                city_id=city.get('id'),
-                city_name=city.get('name'),
-                is_active=city.get('is_active'),
-            )
-            for city in cities
-        ]
+        return [CitySchema(**city) for city in cities]
 
     def is_city_valid(self, city: str) -> bool:
         return City.objects.filter(name__iexact=city, is_active=True).exists()
