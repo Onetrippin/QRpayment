@@ -2,7 +2,7 @@ from ninja import Schema
 
 
 class SuccessResponse(Schema):
-    success: str
+    success: bool
 
 
 class ErrorResponse(Schema):
